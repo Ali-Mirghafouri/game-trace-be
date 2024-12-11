@@ -79,7 +79,8 @@ app.get(
   "/auth/steam/return",
   passport.authenticate("steam", { failureRedirect: "/" }),
   (req, res) => {
-    // Send the user profile as JSON
+  console.log("return: " + req.isAuthenticated());
+  // Send the user profile as JSON
     res.redirect("https://game-trace.netlify.app/dashboard");
   }
 );
