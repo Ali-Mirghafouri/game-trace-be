@@ -29,12 +29,13 @@ app.use(
   session({
     secret: "TMkYE@I9BUe/TK`'s$4/+ZiR'T%i~874,GoJ&HNQl[c?bfaphx-l?k6o~phh6Z", // Replace with a strong secret
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
     store: MongoStore.create({
       mongoUrl: uri,
       collectionName: "sessions", // The collection where session data will be stored
     }),
     cookie: {
+      
       secure: true, // Cookies only sent over HTTPS
       httpOnly: true, // Prevent access via JavaScript
       maxAge: 1000 * 60 * 60 * 24, // 1 day
@@ -81,10 +82,11 @@ passport.use(
 app.get("/", (req, res) => {
   console.log("Session ID:", req.session.id);
   console.log("Session Data Before:", req.session);
+  console.log("Session Data Before:", req.session.viewCount);
 
   req.session.viewCount = (req.session.viewCount || 0) + 1;
 
-  console.log("Session Data After:", req.session);
+  console.log("Session Data After:", req.session.viewCount);
   res.send(`You have visited this page ${req.session.viewCount} times.`);
 });
 
@@ -95,8 +97,8 @@ app.get(
   "/auth/steam/return",
   passport.authenticate("steam", { failureRedirect: "/" }),
   (req, res) => {
-    // Send the user profile as JSON
     console.log(req.isAuthenticated());
+    // Send the user profile as JSON
 
     res.redirect("https://game-trace.netlify.app/dashboard");
   }
