@@ -9,20 +9,36 @@ const cors = require("cors");
 
 const app = express();
 
-const STEAM_API_KEY = "4F6B5FEDF178FFBE46D9F3F8B793855E";
+const STEAM_API_KEY = "32EE6FD86D98585BA5B167FBAB824AAB";
+
+const allowedOrigins = [
+  "http://localhost:3000", // React frontend in development
+  "https://game-trace.netlify.app", // Production frontend
+];
 
 app.use(
   cors({
-    origin: "https://game-trace.netlify.app/", // React frontend URL
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true); // Allow the request
+      } else {
+        callback(new Error("Not allowed by CORS")); // Block the request
+      }
+    },
     credentials: true, // Allow cookies to be sent
   })
 );
+
 // Session middleware setup
 app.use(
   session({
-    secret: "your_secret_key", // Replace with a secure secret
+    secret: "your_secret_key", // Replace with a strong secret
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
+    cookie: {
+      secure: true, // Set to true if using HTTPS
+      httpOnly: true,
+    },
   })
 );
 
@@ -63,13 +79,17 @@ app.get(
   passport.authenticate("steam", { failureRedirect: "/" }),
   (req, res) => {
     // Send the user profile as JSON
-    res.redirect(
-      `https://game-trace.netlify.app/dashboard?user=${encodeURIComponent(
-        JSON.stringify(req.user)
-      )}`
-    );
+    res.redirect("https://game-trace.netlify.app/dashboard");
   }
 );
+
+app.get("/auth/steam/user", (req, res) => {
+  if (req.isAuthenticated()) {
+    res.json({ user: req.user });
+  } else {
+    res.status(401).json({ error: "User not authenticated" });
+  }
+});
 
 app.get("/logout", (req, res) => {
   // Use Passport's logout method to clear the session
