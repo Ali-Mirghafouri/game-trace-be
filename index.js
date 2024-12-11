@@ -85,10 +85,17 @@ app.get("/", (req, res) => {
   console.log("Session Data Before:", req.session.viewCount);
 
   req.session.viewCount = (req.session.viewCount || 0) + 1;
+  req.session.user = "test user";
 
   console.log("Session Data After:", req.session.viewCount);
   res.send(`You have visited this page ${req.session.viewCount} times.`);
-  res.end();
+});
+
+app.get("/get", (req, res) => {
+  console.log("Session ID:", req.session.id);
+  console.log("Session ID:", req.session.user);
+
+  res.send(`You : ${req.session.user} `);
 });
 
 // Routes for authentication
