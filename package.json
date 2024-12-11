@@ -16,5 +16,8 @@
     "express-session": "^1.18.1",
     "passport": "^0.7.0",
     "passport-steam": "^1.0.18"
-  }
+  },
+  "engines": {
+  "node": "16.x"
+}
 }
