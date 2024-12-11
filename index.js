@@ -9,7 +9,6 @@ const cors = require("cors");
 const { MongoClient, ServerApiVersion } = require("mongodb");
 const MongoStore = require("connect-mongo");
 
-
 const uri =
   "mongodb+srv://alimirghafouri:<Ali!22423001>@cluster0gametrace.9vcje.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0GameTrace";
 const app = express();
@@ -65,7 +64,7 @@ app.use(
     resave: false,
     saveUninitialized: false,
     store: MongoStore.create({
-      mongoUrl: mongoUri,
+      mongoUrl: uri,
       collectionName: "sessions", // The collection where session data will be stored
     }),
     cookie: {
