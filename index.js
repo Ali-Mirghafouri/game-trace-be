@@ -85,7 +85,7 @@ app.get(
 );
 
 app.get("/auth/steam/user", (req, res) => {
-  console.log(req);
+  console.log(req.isAuthenticated());
   
   if (req.isAuthenticated()) {
     res.json({ user: req.user });
