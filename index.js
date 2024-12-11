@@ -24,12 +24,10 @@ const client = new MongoClient(uri, {
   },
 });
 
-
-
 // Session middleware setup
 app.use(
   session({
-    secret: "your_secret_key", // Replace with a strong secret
+    secret: "TMkYE@I9BUe/TK`'s$4/+ZiR'T%i~874,GoJ&HNQl[c?bfaphx-l?k6o~phh6Z", // Replace with a strong secret
     resave: false,
     saveUninitialized: false,
     store: MongoStore.create({
@@ -50,7 +48,6 @@ app.use(
     credentials: true, // Allow cookies to be sent
   })
 );
-
 
 // Initialize Passport and session
 app.use(passport.initialize());
