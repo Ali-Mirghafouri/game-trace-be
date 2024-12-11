@@ -13,7 +13,7 @@ const STEAM_API_KEY = "4F6B5FEDF178FFBE46D9F3F8B793855E";
 
 app.use(
   cors({
-    origin: "http://localhost:3000", // React frontend URL
+    origin: "https://game-trace.netlify.app/", // React frontend URL
     credentials: true, // Allow cookies to be sent
   })
 );
@@ -44,7 +44,7 @@ passport.use(
     {
       returnURL: "http://localhost:5000/auth/steam/return",
       realm: "http://localhost:5000/",
-      apiKey: "4F6B5FEDF178FFBE46D9F3F8B793855E", // Replace with your Steam API key
+      apiKey: STEAM_API_KEY, // Replace with your Steam API key
     },
     (identifier, profile, done) => {
       process.nextTick(() => {
@@ -64,7 +64,7 @@ app.get(
   (req, res) => {
     // Send the user profile as JSON
     res.redirect(
-      `http://localhost:3000/dashboard?user=${encodeURIComponent(
+      `https://game-trace.netlify.app/dashboard?user=${encodeURIComponent(
         JSON.stringify(req.user)
       )}`
     );
