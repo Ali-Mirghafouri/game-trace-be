@@ -34,6 +34,7 @@ app.use(
       mongoUrl: uri,
       collectionName: "sessions", // The collection where session data will be stored
     }),
+    name: "GameTraceCookie",
     cookie: {
       sameSite: "none",
       secure: true, // Cookies only sent over HTTPS
