@@ -24,20 +24,10 @@ const client = new MongoClient(uri, {
   },
 });
 
-const allowedOrigins = [
-  "http://localhost:3000", // React frontend in development
-  "https://game-trace.netlify.app", // Production frontend
-];
 
 app.use(
   cors({
-    origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true); // Allow the request
-      } else {
-        callback(new Error("Not allowed by CORS")); // Block the request
-      }
-    },
+    origin: "http://localhost:3000", // Replace with your frontend URL
     credentials: true, // Allow cookies to be sent
   })
 );
