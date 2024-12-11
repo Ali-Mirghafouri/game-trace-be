@@ -106,7 +106,12 @@ async function run() {
 run().catch(console.dir);
 
 app.get("/", (req, res) => {
+  console.log("Session ID:", req.session.id);
+  console.log("Session Data Before:", req.session);
+
   req.session.viewCount = (req.session.viewCount || 0) + 1;
+
+  console.log("Session Data After:", req.session);
   res.send(`You have visited this page ${req.session.viewCount} times.`);
 });
 
