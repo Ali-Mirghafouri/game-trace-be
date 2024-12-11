@@ -25,12 +25,6 @@ const client = new MongoClient(uri, {
 });
 
 
-app.use(
-  cors({
-    origin: "http://localhost:3000", // Replace with your frontend URL
-    credentials: true, // Allow cookies to be sent
-  })
-);
 
 // Session middleware setup
 app.use(
@@ -49,6 +43,14 @@ app.use(
     },
   })
 );
+
+app.use(
+  cors({
+    origin: "http://localhost:3000", // Replace with your frontend URL
+    credentials: true, // Allow cookies to be sent
+  })
+);
+
 
 // Initialize Passport and session
 app.use(passport.initialize());
