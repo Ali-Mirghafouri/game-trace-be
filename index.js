@@ -93,11 +93,11 @@ app.get("/auth/steam/user", (req, res) => {
 });
 
 app.get("/test", (req, res) => {
-  if (req.isAuthenticated()) {
+  // if (req.isAuthenticated()) {
     res.json({ user: "test" });
-  } else {
-    res.status(401).json({ error: "User not authenticated" });
-  }
+  // } else {
+  //   res.status(401).json({ error: "User not authenticated" });
+  // }
 });
 
 app.get("/logout", (req, res) => {
