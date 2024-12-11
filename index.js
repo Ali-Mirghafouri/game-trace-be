@@ -46,7 +46,7 @@ app.use(
 
 app.use(
   cors({
-    origin: "http://localhost:3000", // Replace with your frontend URL
+    origin: "https://game-trace-be.onrender.com", // Replace with your frontend URL
     credentials: true, // Allow cookies to be sent
   })
 );
