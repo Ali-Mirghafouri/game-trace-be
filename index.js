@@ -11,12 +11,10 @@ const MongoStore = require("connect-mongo");
 
 const username = encodeURIComponent("alimirghafouri");
 const password = encodeURIComponent("Ali!22423001");
-const uri =
-  `mongodb+srv://${username}:${password}@cluster0gametrace.9vcje.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0GameTrace`;
+const uri = `mongodb+srv://${username}:${password}@cluster0gametrace.9vcje.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0GameTrace`;
 const app = express();
 const port = process.env.PORT || 4000;
 const STEAM_API_KEY = "32EE6FD86D98585BA5B167FBAB824AAB";
-
 
 const client = new MongoClient(uri, {
   serverApi: {
@@ -30,7 +28,6 @@ const allowedOrigins = [
   "http://localhost:3000", // React frontend in development
   "https://game-trace.netlify.app", // Production frontend
 ];
-
 
 app.use(
   cors({
@@ -121,11 +118,14 @@ app.get(
   passport.authenticate("steam", { failureRedirect: "/" }),
   (req, res) => {
     // Send the user profile as JSON
+    console.log(req.isAuthenticated());
+
     res.redirect("https://game-trace.netlify.app/dashboard");
   }
 );
 
 app.get("/auth/steam/user", (req, res) => {
+  console.log(req.isAuthenticated());
   if (req.isAuthenticated()) {
     res.json({ user: req.user });
   } else {
