@@ -6,12 +6,8 @@ const passport = require("passport");
 const axios = require("axios");
 const SteamStrategy = require("passport-steam").Strategy;
 const cors = require("cors");
-const RedisStore = require("connect-redis")(session);
-const Redis = require("ioredis");
 
 const app = express();
-
-const redisClient = new Redis();
 
 const STEAM_API_KEY = "32EE6FD86D98585BA5B167FBAB824AAB";
 
@@ -36,7 +32,6 @@ app.use(
 // Session middleware setup
 app.use(
   session({
-    store: new RedisStore({ client: redisClient }),
     secret: "your_secret_key", // Replace with a strong secret
     resave: false,
     saveUninitialized: false,
