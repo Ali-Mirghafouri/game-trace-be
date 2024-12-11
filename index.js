@@ -80,7 +80,7 @@ passport.use(
 );
 
 app.get("/", (req, res) => {
-  console.log("Session ID:", req.session.id);
+  console.log("Session ID:", req.sessionID);
   console.log("Session Data Before:", req.session);
   console.log("Session Data Before:", req.session.viewCount);
 
