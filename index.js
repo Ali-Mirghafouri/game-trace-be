@@ -35,7 +35,7 @@ app.use(
       collectionName: "sessions", // The collection where session data will be stored
     }),
     cookie: {
-      
+      sameSite: "none",
       secure: true, // Cookies only sent over HTTPS
       httpOnly: true, // Prevent access via JavaScript
       maxAge: 1000 * 60 * 60 * 24, // 1 day
@@ -88,6 +88,7 @@ app.get("/", (req, res) => {
 
   console.log("Session Data After:", req.session.viewCount);
   res.send(`You have visited this page ${req.session.viewCount} times.`);
+  res.end();
 });
 
 // Routes for authentication
