@@ -8,7 +8,7 @@ const SteamStrategy = require("passport-steam").Strategy;
 const cors = require("cors");
 
 const app = express();
-
+const port = process.env.PORT || 4000;
 const STEAM_API_KEY = "32EE6FD86D98585BA5B167FBAB824AAB";
 
 const allowedOrigins = [
@@ -175,6 +175,7 @@ app.get("/api/app-achievement", async (req, res) => {
 });
 
 // Start the server
-app.listen(5000, () => {
-  console.log("Server listening on port 5000");
-});
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
+})
+
