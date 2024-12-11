@@ -36,8 +36,9 @@ app.use(
     resave: false,
     saveUninitialized: false,
     cookie: {
-      secure: true, // Set to true if using HTTPS
-      httpOnly: true,
+      secure: true, // Cookies only sent over HTTPS
+      httpOnly: true, // Prevent access via JavaScript
+      maxAge: 1000 * 60 * 60 * 24, // 1 day
     },
   })
 );
@@ -86,6 +87,14 @@ app.get(
 app.get("/auth/steam/user", (req, res) => {
   if (req.isAuthenticated()) {
     res.json({ user: req.user });
+  } else {
+    res.status(401).json({ error: "User not authenticated" });
+  }
+});
+
+app.get("/test", (req, res) => {
+  if (req.isAuthenticated()) {
+    res.json({ user: "test" });
   } else {
     res.status(401).json({ error: "User not authenticated" });
   }
@@ -176,6 +185,5 @@ app.get("/api/app-achievement", async (req, res) => {
 
 // Start the server
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
-
+  console.log(`Example app listening on port ${port}`);
+});
