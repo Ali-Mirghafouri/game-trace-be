@@ -58,8 +58,8 @@ passport.deserializeUser((obj, done) => {
 passport.use(
   new SteamStrategy(
     {
-      returnURL: "http://localhost:5000/auth/steam/return",
-      realm: "http://localhost:5000/",
+      returnURL: "https://game-trace-be.onrender.com/auth/steam/return",
+      realm: "https://game-trace-be.onrender.com",
       apiKey: STEAM_API_KEY, // Replace with your Steam API key
     },
     (identifier, profile, done) => {
