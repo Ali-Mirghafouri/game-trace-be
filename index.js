@@ -9,11 +9,14 @@ const cors = require("cors");
 const { MongoClient, ServerApiVersion } = require("mongodb");
 const MongoStore = require("connect-mongo");
 
+const username = encodeURIComponent("alimirghafouri");
+const password = encodeURIComponent("Ali!22423001");
 const uri =
-  "mongodb+srv://alimirghafouri:<Ali!22423001>@cluster0gametrace.9vcje.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0GameTrace";
+  "mongodb+srv://${username}:${password}@cluster0gametrace.9vcje.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0GameTrace";
 const app = express();
 const port = process.env.PORT || 4000;
 const STEAM_API_KEY = "32EE6FD86D98585BA5B167FBAB824AAB";
+
 
 const client = new MongoClient(uri, {
   serverApi: {
