@@ -46,7 +46,7 @@ app.use(
 
 app.use(
   cors({
-    origin: "https://game-trace.netlify.app/", // Replace with your frontend URL
+    origin: "https://game-trace.netlify.app", // Replace with your frontend URL
     credentials: true, // Allow cookies to be sent
   })
 );
