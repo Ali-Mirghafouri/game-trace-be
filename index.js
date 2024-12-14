@@ -27,7 +27,7 @@ const client = new MongoClient(uri, {
 });
 
 // Session middleware setup
-// app.set("trust proxy", true);
+app.set("trust proxy", true);
 app.use(
   session({
     secret: "TMkYE@I9BUe/TK`'s$4/+ZiR'T%i~874,GoJ&HNQl[c?bfaphx-l?k6o~phh6Z", // Replace with a strong secret
@@ -39,9 +39,9 @@ app.use(
     }),
     name: "GameTraceCookie",
     cookie: {
-      // sameSite: "none",
-      secure: false, // Cookies only sent over HTTPS
-      httpOnly: false, // Prevent access via JavaScript
+      sameSite: "none",
+      secure: true, // Cookies only sent over HTTPS
+      httpOnly: true, // Prevent access via JavaScript
       maxAge: 1000 * 60 * 60 * 24, // 1 day
     },
   })
