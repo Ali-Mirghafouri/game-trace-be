@@ -14,7 +14,7 @@ const password = encodeURIComponent("Ali!22423001");
 const uri = `mongodb+srv://${username}:${password}@cluster0gametrace.9vcje.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0GameTrace`;
 const app = express();
 const port = process.env.PORT || 4000;
-const STEAM_API_KEY = "32EE6FD86D98585BA5B167FBAB824AAB";
+const STEAM_API_KEY = "DE0BB291C879152EDC30355548F39188";
 const Backend_URl = "https://game-trace-be.onrender.com";
 const App_URl = "https://game-trace.netlify.app";
 
@@ -27,7 +27,7 @@ const client = new MongoClient(uri, {
 });
 
 // Session middleware setup
-app.set("trust proxy", true);
+// app.set("trust proxy", true);
 app.use(
   session({
     secret: "TMkYE@I9BUe/TK`'s$4/+ZiR'T%i~874,GoJ&HNQl[c?bfaphx-l?k6o~phh6Z", // Replace with a strong secret
@@ -39,9 +39,9 @@ app.use(
     }),
     name: "GameTraceCookie",
     cookie: {
-      sameSite: "none",
-      secure: true, // Cookies only sent over HTTPS
-      httpOnly: true, // Prevent access via JavaScript
+      // sameSite: "none",
+      secure: false, // Cookies only sent over HTTPS
+      httpOnly: false, // Prevent access via JavaScript
       maxAge: 1000 * 60 * 60 * 24, // 1 day
     },
   })
@@ -90,7 +90,7 @@ app.get(
   "/auth/steam/return",
   passport.authenticate("steam", { failureRedirect: "/" }),
   (req, res) => {
-    console.log(req.isAuthenticated());
+    console.log("return: " + req.isAuthenticated());
     // Send the user profile as JSON
 
     res.redirect(App_URl + "/dashboard");
@@ -98,7 +98,7 @@ app.get(
 );
 
 app.get("/auth/steam/user", (req, res) => {
-  console.log(req.isAuthenticated());
+  console.log("user: " + req.isAuthenticated());
   if (req.isAuthenticated()) {
     res.json({ user: req.user });
   } else {
@@ -126,9 +126,9 @@ app.get("/auth/status", (req, res) => {
 });
 
 app.get("/api/owned-games", async (req, res) => {
-  const { steamid } = req.query; // Get Steam ID from the query parameter
+  const { steamId } = req.query; // Get Steam ID from the query parameter
 
-  if (!steamid) {
+  if (!steamId) {
     return res.status(400).json({ error: "Steam ID is required" });
   }
 
@@ -139,7 +139,7 @@ app.get("/api/owned-games", async (req, res) => {
       {
         params: {
           key: STEAM_API_KEY,
-          steamid: steamid,
+          steamid: steamId,
           format: "json",
           include_appinfo: true,
           include_played_free_games: true,
