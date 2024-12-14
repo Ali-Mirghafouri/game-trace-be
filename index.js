@@ -15,6 +15,8 @@ const uri = `mongodb+srv://${username}:${password}@cluster0gametrace.9vcje.mongo
 const app = express();
 const port = process.env.PORT || 4000;
 const STEAM_API_KEY = "32EE6FD86D98585BA5B167FBAB824AAB";
+const Backend_URl = "http://localhost:4000";
+const App_URl = "http://localhost:3000";
 
 const client = new MongoClient(uri, {
   serverApi: {
@@ -25,7 +27,7 @@ const client = new MongoClient(uri, {
 });
 
 // Session middleware setup
-app.set('trust proxy', true);
+app.set("trust proxy", true);
 app.use(
   session({
     secret: "TMkYE@I9BUe/TK`'s$4/+ZiR'T%i~874,GoJ&HNQl[c?bfaphx-l?k6o~phh6Z", // Replace with a strong secret
@@ -47,7 +49,7 @@ app.use(
 
 app.use(
   cors({
-    origin: "https://game-trace.netlify.app", // Replace with your frontend URL
+    origin: App_URl, // Replace with your frontend URL
     credentials: true, // Allow cookies to be sent
   })
 );
@@ -68,8 +70,8 @@ passport.deserializeUser((obj, done) => {
 passport.use(
   new SteamStrategy(
     {
-      returnURL: "https://game-trace-be.onrender.com/auth/steam/return",
-      realm: "https://game-trace-be.onrender.com",
+      returnURL: Backend_URl + "/auth/steam/return",
+      realm: Backend_URl,
       apiKey: STEAM_API_KEY, // Replace with your Steam API key
     },
     (identifier, profile, done) => {
@@ -81,7 +83,6 @@ passport.use(
   )
 );
 
-
 // Routes for authentication
 app.get("/auth/steam", passport.authenticate("steam"));
 
@@ -92,7 +93,7 @@ app.get(
     console.log(req.isAuthenticated());
     // Send the user profile as JSON
 
-    res.redirect("https://game-trace.netlify.app/dashboard");
+    res.redirect(App_URl + "/dashboard");
   }
 );
 
