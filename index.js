@@ -14,7 +14,7 @@ const password = encodeURIComponent("Ali!22423001");
 const uri = `mongodb+srv://${username}:${password}@cluster0gametrace.9vcje.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0GameTrace`;
 const app = express();
 const port = process.env.PORT || 4000;
-const STEAM_API_KEY = "DE0BB291C879152EDC30355548F39188";
+const STEAM_API_KEY = "CAEB1D04B18704AE606573672559E7EA";
 const Backend_URl = "https://game-trace-be.onrender.com";
 const App_URl = "https://game-trace.netlify.app";
 
