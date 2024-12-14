@@ -15,8 +15,8 @@ const uri = `mongodb+srv://${username}:${password}@cluster0gametrace.9vcje.mongo
 const app = express();
 const port = process.env.PORT || 4000;
 const STEAM_API_KEY = "32EE6FD86D98585BA5B167FBAB824AAB";
-const Backend_URl = "http://localhost:4000";
-const App_URl = "http://localhost:3000";
+const Backend_URl = "https://game-trace-be.onrender.com";
+const App_URl = "https://game-trace.netlify.app";
 
 const client = new MongoClient(uri, {
   serverApi: {
