@@ -90,7 +90,7 @@ app.get(
   "/auth/steam/return",
   passport.authenticate("steam", { failureRedirect: "/" }),
   (req, res) => {
-    console.log(req.isAuthenticated());
+    console.log("return: " + req.isAuthenticated());
     // Send the user profile as JSON
 
     res.redirect(App_URl + "/dashboard");
@@ -98,7 +98,7 @@ app.get(
 );
 
 app.get("/auth/steam/user", (req, res) => {
-  console.log(req.isAuthenticated());
+  console.log("user: " + req.isAuthenticated());
   if (req.isAuthenticated()) {
     res.json({ user: req.user });
   } else {
@@ -126,9 +126,9 @@ app.get("/auth/status", (req, res) => {
 });
 
 app.get("/api/owned-games", async (req, res) => {
-  const { steamid } = req.query; // Get Steam ID from the query parameter
+  const { steamId } = req.query; // Get Steam ID from the query parameter
 
-  if (!steamid) {
+  if (!steamId) {
     return res.status(400).json({ error: "Steam ID is required" });
   }
 
@@ -139,7 +139,7 @@ app.get("/api/owned-games", async (req, res) => {
       {
         params: {
           key: STEAM_API_KEY,
-          steamid: steamid,
+          steamid: steamId,
           format: "json",
           include_appinfo: true,
           include_played_free_games: true,
