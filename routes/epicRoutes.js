@@ -1,10 +1,16 @@
 const express = require("express");
 const axios = require("axios");
 const passport = require("passport");
-const Backend_URl = "http://localhost:4000";
-const App_URl = "http://localhost:3000";
-const EPIC_CLIENT_ID = "xyza78913RbmWdZcBAk9MReLlBHU03cI";
-const EPIC_CLIENT_SECRET = "EayRzb84IirVQnp4LMmbzWx7wZrRW7drwY/BoC2nzJs";
+require("dotenv").config();
+
+const Backend_URl = process.env.BACKEND_URL;
+const App_URl = process.env.APP_URL;
+const EPIC_CLIENT_ID = process.env.EPIC_CLIENT_ID;
+const EPIC_CLIENT_SECRET = process.env.EPIC_CLIENT_SECRET;
 
 const router = express.Router();
 
+
+
+
+module.exports = router;

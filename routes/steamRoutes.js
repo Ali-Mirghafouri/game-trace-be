@@ -1,12 +1,13 @@
 const express = require("express");
 const axios = require("axios");
 const passport = require("passport");
-const Backend_URl = "http://localhost:4000";
-const App_URl = "http://localhost:3000";
+require("dotenv").config();
+const Backend_URl = process.env.BACKEND_URL;
+const App_URl = process.env.APP_URL;
 
 const router = express.Router();
 
-const STEAM_API_KEY = "CAEB1D04B18704AE606573672559E7EA";
+const STEAM_API_KEY = process.env.STEAM_API_KEY;
 
 router.get("/auth/steam", passport.authenticate("steam"));
 
@@ -112,3 +113,5 @@ router.get("/api/router-achievement", async (req, res) => {
     res.json([]);
   }
 });
+
+module.exports = router;

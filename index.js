@@ -3,18 +3,20 @@ const express = require("express");
 const session = require("express-session");
 const passport = require("passport");
 const SteamStrategy = require("passport-steam").Strategy;
+require("dotenv").config();
 const cors = require("cors");
 const { MongoClient, ServerApiVersion } = require("mongodb");
 const MongoStore = require("connect-mongo");
 const steamRoutes = require("./routes/steamRoutes");
 const epicRoutes = require("./routes/epicRoutes");
-const username = encodeURIComponent("alimirghafouri");
-const password = encodeURIComponent("Ali!22423001");
+const username = encodeURIComponent(process.env.mangoUser);
+const password = encodeURIComponent(process.env.password);
 const uri = `mongodb+srv://${username}:${password}@cluster0gametrace.9vcje.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0GameTrace`;
 const app = express();
 const port = process.env.PORT || 4000;
-const Backend_URl = "http://localhost:4000";
-const App_URl = "http://localhost:3000";
+const Backend_URl = process.env.BACKEND_URL;
+const App_URl = process.env.APP_URL;
+const STEAM_API_KEY = process.env.STEAM_API_KEY;
 
 const client = new MongoClient(uri, {
   serverApi: {
@@ -28,7 +30,7 @@ const client = new MongoClient(uri, {
 // app.set("trust proxy", true);
 app.use(
   session({
-    secret: "TMkYE@I9BUe/TK`'s$4/+ZiR'T%i~874,GoJ&HNQl[c?bfaphx-l?k6o~phh6Z", // Replace with a strong secret
+    secret: process.env.secret, // Replace with a strong secret
     resave: false,
     saveUninitialized: false,
     store: MongoStore.create({
