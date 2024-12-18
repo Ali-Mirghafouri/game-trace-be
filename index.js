@@ -33,10 +33,10 @@ app.use(
     secret: process.env.secret, // Replace with a strong secret
     resave: false,
     saveUninitialized: false,
-    store: MongoStore.create({
-      mongoUrl: uri,
-      collectionName: "sessions", // The collection where session data will be stored
-    }),
+    // store: MongoStore.create({
+    //   mongoUrl: uri,
+    //   collectionName: "sessions", // The collection where session data will be stored
+    // }),
     name: "GameTraceCookie",
     cookie: {
       // sameSite: "none",
