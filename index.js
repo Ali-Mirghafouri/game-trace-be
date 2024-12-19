@@ -8,7 +8,6 @@ const cors = require("cors");
 const { MongoClient, ServerApiVersion } = require("mongodb");
 const MongoStore = require("connect-mongo");
 const steamRoutes = require("./routes/steamRoutes");
-const epicRoutes = require("./routes/epicRoutes");
 const username = encodeURIComponent(process.env.mangoUser);
 const password = encodeURIComponent(process.env.password);
 const uri = `mongodb+srv://${username}:${password}@cluster0gametrace.9vcje.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0GameTrace`;
