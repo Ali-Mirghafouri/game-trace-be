@@ -26,21 +26,21 @@ const client = new MongoClient(uri, {
 });
 
 // Session middleware setup
-// app.set("trust proxy", true);
+app.set("trust proxy", true);
 app.use(
   session({
     secret: process.env.secret, // Replace with a strong secret
     resave: false,
     saveUninitialized: false,
-    // store: MongoStore.create({
-    //   mongoUrl: uri,
-    //   collectionName: "sessions", // The collection where session data will be stored
-    // }),
+    store: MongoStore.create({
+      mongoUrl: uri,
+      collectionName: "sessions", // The collection where session data will be stored
+    }),
     name: "GameTraceCookie",
     cookie: {
-      // sameSite: "none",
-      secure: false, // Cookies only sent over HTTPS
-      httpOnly: false, // Prevent access via JavaScript
+      sameSite: "none",
+      secure: true, // Cookies only sent over HTTPS
+      httpOnly: true, // Prevent access via JavaScript
       maxAge: 1000 * 60 * 60 * 24, // 1 day
     },
   })
