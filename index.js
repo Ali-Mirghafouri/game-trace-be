@@ -83,7 +83,6 @@ passport.use(
 );
 
 app.use("/", steamRoutes);
-app.use("/", epicRoutes);
 // Start the server
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
